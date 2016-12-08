@@ -1,0 +1,26 @@
+{
+  "name": "angular2-webpack",
+  "version": "1.0.0",
+  "description": "Angular 2 stater kit using webpack",
+  "main": "''",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malvarezhcr/angular2-webpack.git"
+  },
+  "keywords": [
+    "webpack",
+    "angular"
+  ],
+  "author": "Mariano Alvarez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/malvarezhcr/angular2-webpack/issues"
+  },
+  "homepage": "https://github.com/malvarezhcr/angular2-webpack#readme",
+  "devDependencies": {
+    "webpack": "^2.1.0-beta.27"
+  }
+}

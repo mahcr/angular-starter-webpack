@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./helpers');
+var tslinConfig = require('./tslint');
 
 module.exports = {
   // will create 3 different files
@@ -24,7 +25,7 @@ module.exports = {
 
   module: {
     preLoaders: [
-      // { test: /\.ts$/, loader: 'tslint-loader', exclude: [/node_modules/] }
+      { test: /\.ts$/, loader: 'tslint-loader', exclude: [/node_modules/] }
     ],
     loaders: [
       {
@@ -67,15 +68,7 @@ module.exports = {
       }
     ]
   },
-    // tslint: {
-    //     emitErrors: false,
-    //     failOnHint: false,
-    //     configuration: {
-    //         rules: {
-    //             quotemark: [true, 'double']
-    //         }
-    //     }
-    // },
+  tslint: tslinConfig,
   plugins: [
     /**
      * find shared dependecies and remove them from left to right

@@ -7,6 +7,5 @@ import './theme/styles.scss';
   styleUrls: [ './app.component.scss' ]
 })
 export class AppComponent {
-  public test:string = 'tet';
 
 }

@@ -4,10 +4,10 @@
 * Lazy Loading (in progress)
 * AOT (in progress)
 * Tree shaking (in progress)
-* SASS (in progress)
+* SASS (done)
 * @Types (done)
 * Uglify (in progress)
-* TSlint (in progress)
+* TSlint (done)
 
 ## Get Started
 * nvm install 6.9.1

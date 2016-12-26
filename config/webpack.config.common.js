@@ -12,17 +12,20 @@ module.exports = {
   },
 
   output: {
-      // to create each filw with the same of the key of entry
+      // to create each file with the same of the key of entry
       filename: '[name].js'
   },
 
   resolve: {
     // make webpack understand imports
-    extensions: ['', '.ts', '.js'],
+    extensions: ['', '.ts', '.js', '.css', '.scss'],
     modulesDirectories: ['node_modules']
   },
 
   module: {
+    preLoaders: [
+      // { test: /\.ts$/, loader: 'tslint-loader', exclude: [/node_modules/] }
+    ],
     loaders: [
       {
         test: /\.ts$/,
@@ -33,22 +36,46 @@ module.exports = {
         loader: 'html'
       },
       {
-        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-        loader: 'file?name=assets/[name].[hash].[ext]'
+        test: /\.(png|jpe?g|gif|svg)$/,
+        loader: 'file?name=assets/imgs/[name].[hash].[ext]'
       },
       {
+        test: /\.(woff|woff2|ttf|eot|ico)$/,
+        loader: 'file?name=assets/fonts/[name].[hash].[ext]'
+      },
+      { // handle general styles
         test: /\.css$/,
-        exclude: helpers.root('src', 'app'),
+        include: helpers.root('src', 'app/theme'),
         loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
       },
-      {
+      { // handle component styles
         test: /\.css$/,
+        exclude: helpers.root('src', 'app/theme'),
         include: helpers.root('src', 'app'),
         loader: 'raw'
+      },
+      { // handle general styles
+        test: /\.scss$/,
+        include: helpers.root('src', 'app/theme'),
+        loaders: ['style-loader', 'css-loader', 'resolve-url', 'sass-loader?sourceMap']
+      },
+      { // handle component scss
+        test: /\.scss$/,
+        exclude: [/node_modules/, helpers.root('src', 'app/theme')],
+        include: helpers.root('src', 'app'), // remove
+        loaders: ['exports-loader?module.exports.toString()', 'css', 'sass']
       }
     ]
   },
-
+    // tslint: {
+    //     emitErrors: false,
+    //     failOnHint: false,
+    //     configuration: {
+    //         rules: {
+    //             quotemark: [true, 'double']
+    //         }
+    //     }
+    // },
   plugins: [
     /**
      * find shared dependecies and remove them from left to right

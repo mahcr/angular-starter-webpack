@@ -4,9 +4,10 @@
 * Lazy Loading (in progress)
 * AOT (in progress)
 * Tree shaking (in progress)
+* webpack 2 (in progress)
 * SASS (done)
 * @Types (done)
-* Uglify (in progress)
+* Uglify (done)
 * TSlint (done)
 
 ## Get Started

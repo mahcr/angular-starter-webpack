@@ -6,7 +6,7 @@ var helpers = require('./helpers');
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
-const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
+const extractCSS = new ExtractTextPlugin('assets/stylesheets/[name].css');
 
 module.exports = webpackMerge(commonConfig, {
   output: {
@@ -48,7 +48,6 @@ module.exports = webpackMerge(commonConfig, {
       },
       sourceMap: false
     }),
-    new ExtractTextPlugin('./dist/assets/testing.css'),
     new webpack.DefinePlugin({
       'process.env': {
         'ENV': JSON.stringify(ENV)

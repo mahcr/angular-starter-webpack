@@ -16,21 +16,21 @@ module.exports = webpackMerge(commonConfig, {
     chunkFilename: '[id].[hash].chunk.js'
   },
 
-  htmlLoader: {
-    minimize: false // workaround for ng2
-  },
-
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.global\.scss$/i,
-        loader: extractCSS.extract(['css','sass-loader'])
+        use: [ ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: ['css-loader'] }),
+                'to-string-loader',
+                'css-loader',
+                'sass-loader'
+            ]
       },
       { // handle component scss
         test: /\.scss$/,
         exclude: [/node_modules/, helpers.root('src', 'app/theme')],
         include: helpers.root('src', 'app'), // remove
-        loaders: ['exports-loader?module.exports.toString()', 'css', 'sass']
+        use: ['exports-loader?module.exports.toString()', 'css-loader', 'sass-loader']
       }
     ]
   },
@@ -38,7 +38,6 @@ module.exports = webpackMerge(commonConfig, {
   plugins: [
     extractCSS,
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false

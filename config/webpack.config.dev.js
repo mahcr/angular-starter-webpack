@@ -15,36 +15,36 @@ module.exports = webpackMerge(commonConfig, {
   },
 
   module: {
-    preLoaders: [
-      { test: /\.ts$/, loader: 'tslint-loader', exclude: [/node_modules/] }
-    ],
-    loaders: [
+    // preLoaders: [
+    //   { test: /\.ts$/, loader: 'tslint-loader', exclude: [/node_modules/] }
+    // ],
+    rules: [
       { // handle general styles
         test: /\.css$/,
         include: helpers.root('src', 'app/theme'),
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
+        use: ExtractTextPlugin.extract( { fallbackLoader: 'css-loader', loader: 'css?sourceMap' })
       },
       { // handle component styles
         test: /\.css$/,
         exclude: helpers.root('src', 'app/theme'),
         include: helpers.root('src', 'app'),
-        loader: 'raw'
+        use: 'raw'
       },
       { // handle general styles
         test: /\.global\.scss$/,
         include: helpers.root('src', 'app/theme'),
-        loaders: ['style-loader', 'css-loader', 'resolve-url', 'sass-loader?sourceMap']
+        use: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader?sourceMap']
       },
       { // handle component scss
         test: /\.scss$/,
         exclude: [/node_modules/, helpers.root('src', 'app/theme')],
         include: helpers.root('src', 'app'), // remove
-        loaders: ['exports-loader?module.exports.toString()', 'css', 'sass']
+        use: ['exports-loader?module.exports.toString()', 'css-loader', 'sass-loader']
       }
     ]
   },
 
-  tslint: tslinConfig,
+  // tslint: tslinConfig,
 
   devServer: {
     historyApiFallback: true,

@@ -2,7 +2,6 @@ const commonConfig = require('./webpack.config.common.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const helpers = require('./helpers');
 const tslinConfig = require('./tslint');
-const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 
 module.exports = webpackMerge(commonConfig, {

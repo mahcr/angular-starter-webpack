@@ -3,7 +3,6 @@ const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const helpers = require('./helpers');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
 
 module.exports = {
   // will create 3 different files
@@ -51,7 +50,7 @@ module.exports = {
      * if app -> share dependecies with vendor they will be removed from app
      * */
     new CommonsChunkPlugin({
-      name: ['polyfills', 'vendor'].reverse()
+      name: ['app', 'vendor', 'polyfills']
     }),
 
     new HtmlWebpackPlugin({

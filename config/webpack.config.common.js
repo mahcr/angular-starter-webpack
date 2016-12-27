@@ -2,7 +2,6 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./helpers');
-var tslinConfig = require('./tslint');
 
 module.exports = {
   // will create 3 different files
@@ -24,9 +23,6 @@ module.exports = {
   },
 
   module: {
-    preLoaders: [
-      { test: /\.ts$/, loader: 'tslint-loader', exclude: [/node_modules/] }
-    ],
     loaders: [
       {
         test: /\.ts$/,
@@ -43,32 +39,10 @@ module.exports = {
       {
         test: /\.(woff|woff2|ttf|eot|ico)$/,
         loader: 'file?name=assets/fonts/[name].[hash].[ext]'
-      },
-      { // handle general styles
-        test: /\.css$/,
-        include: helpers.root('src', 'app/theme'),
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
-      },
-      { // handle component styles
-        test: /\.css$/,
-        exclude: helpers.root('src', 'app/theme'),
-        include: helpers.root('src', 'app'),
-        loader: 'raw'
-      },
-      { // handle general styles
-        test: /\.scss$/,
-        include: helpers.root('src', 'app/theme'),
-        loaders: ['style-loader', 'css-loader', 'resolve-url', 'sass-loader?sourceMap']
-      },
-      { // handle component scss
-        test: /\.scss$/,
-        exclude: [/node_modules/, helpers.root('src', 'app/theme')],
-        include: helpers.root('src', 'app'), // remove
-        loaders: ['exports-loader?module.exports.toString()', 'css', 'sass']
       }
     ]
   },
-  tslint: tslinConfig,
+
   plugins: [
     /**
      * find shared dependecies and remove them from left to right

@@ -1,8 +1,12 @@
-var webpack = require('webpack');
-var webpackMerge = require('webpack-merge');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var commonConfig = require('./webpack.config.common.js');
-var helpers = require('./helpers');
+const commonConfig = require('./webpack.config.common.js');
+const DedupePlugin = require('webpack/lib/optimize/DedupePlugin');
+const DefinePlugin = require('webpack/lib//DefinePlugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const helpers = require('./helpers');
+const NoErrorsPlugin = require('webpack/lib/NoErrorsPlugin');
+const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
@@ -37,9 +41,9 @@ module.exports = webpackMerge(commonConfig, {
 
   plugins: [
     extractCSS,
-    new webpack.NoErrorsPlugin(),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
+    new NoErrorsPlugin(),
+    new DedupePlugin(),
+    new UglifyJsPlugin({
       compress: {
         warnings: false
       },
@@ -48,7 +52,7 @@ module.exports = webpackMerge(commonConfig, {
       },
       sourceMap: false
     }),
-    new webpack.DefinePlugin({
+    new DefinePlugin({
       'process.env': {
         'ENV': JSON.stringify(ENV)
       }

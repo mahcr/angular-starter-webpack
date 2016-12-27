@@ -1,8 +1,8 @@
-var webpack = require('webpack');
-var webpackMerge = require('webpack-merge');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var commonConfig = require('./webpack.config.common.js');
-var helpers = require('./helpers');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const commonConfig = require('./webpack.config.common.js');
+const helpers = require('./helpers');
+const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
@@ -21,10 +21,9 @@ module.exports = webpackMerge(commonConfig, {
       {
         test: /\.global\.scss$/i,
         use: [ ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: ['css-loader'] }),
-                'to-string-loader',
-                'css-loader',
-                'sass-loader'
-            ]
+               'to-string-loader',
+               'css-loader',
+               'sass-loader' ]
       },
       { // handle component scss
         test: /\.scss$/,

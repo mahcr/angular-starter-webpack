@@ -1,8 +1,9 @@
-var webpackMerge = require('webpack-merge');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var commonConfig = require('./webpack.config.common.js');
-var helpers = require('./helpers');
-var tslinConfig = require('./tslint');
+const commonConfig = require('./webpack.config.common.js');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const helpers = require('./helpers');
+const tslinConfig = require('./tslint');
+const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
 
 module.exports = webpackMerge(commonConfig, {
   devtool: 'cheap-module-eval-source-map',
@@ -15,10 +16,13 @@ module.exports = webpackMerge(commonConfig, {
   },
 
   module: {
-    // preLoaders: [
-    //   { test: /\.ts$/, loader: 'tslint-loader', exclude: [/node_modules/] }
-    // ],
     rules: [
+      { // preloader
+        enforce: 'pre',
+        test: /\.ts$/,
+        use: 'tslint-loader',
+        exclude: /(node_modules)/,
+      },
       { // handle general styles
         test: /\.css$/,
         include: helpers.root('src', 'app/theme'),
@@ -44,10 +48,9 @@ module.exports = webpackMerge(commonConfig, {
     ]
   },
 
-  // tslint: tslinConfig,
-
   devServer: {
     historyApiFallback: true,
     stats: 'minimal'
   }
+
 });

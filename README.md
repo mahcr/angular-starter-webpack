@@ -5,6 +5,7 @@
 * AOT (in progress)
 * Tree shaking (in progress)
 * webpack 2 (in progress)
+* autoprefix
 * SASS (done)
 * @Types (done)
 * Uglify (done)

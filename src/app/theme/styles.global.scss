@@ -1,5 +1,18 @@
-body {
-  background: green;
-  color: #fff;
-  // background-image: url('./assets/imgs/angular-logo.png');
+// --------------------------------------------------
+// Most of the imports should be place here
+// --------------------------------------------------
+
+// variables
+@import "./core/variables";
+
+// helpers
+@import "./helpers/utils";
+
+// core
+@import "./core/font";
+@import "./core/typo";
+
+// other global styles
+main {
+  display: flex;
 }

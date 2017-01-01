@@ -4,12 +4,11 @@ const ExtractTextPlugin   = require('extract-text-webpack-plugin');
 const helpers             = require('./helpers');
 const LoaderOptionsPlugin = require('webpack/lib/NoErrorsPlugin');
 const NoErrorsPlugin = require('webpack/lib/NoErrorsPlugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require ('webpack/lib/optimize/UglifyJsPlugin');
 const webpackMerge   = require('webpack-merge');
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
-
-const extractCSS = new ExtractTextPlugin('assets/stylesheets/[name].css');
 
 module.exports = webpackMerge(commonConfig, {
   /**
@@ -23,33 +22,28 @@ module.exports = webpackMerge(commonConfig, {
   },
 
   module: {
-    rules: [
-      /**
-       * create extract sass and create global file
-       */
-      {
-        test: /\.global\.scss$/i,
-        use: [ ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: ['css-loader'] }),
-               'to-string-loader',
-               'css-loader',
-               'sass-loader' ]
-      },
-      /**
-       * in charge of extract Sass styles
-       * exports-loader - fix url issue
-       */
-      {
-        test: /\.scss$/,
-        exclude: [/node_modules/, helpers.root('src', 'app/theme')],
-        include: helpers.root('src', 'app'),
-        use: ['exports-loader?module.exports.toString()', 'css-loader', 'sass-loader']
-      }
-    ]
+    rules: [ ]
   },
 
   plugins: [
-    extractCSS,
+    /**
+     * create css chuck with general styles
+     */
+    new ExtractTextPlugin('assets/stylesheets/name].[hash].css'),
+    /**
+     * minify CSS code
+     */
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/,
+      cssProcessorOptions: { discardComments: { removeAll: true } }
+    }),
+    /**
+     * remove webpack erros
+     */
     new NoErrorsPlugin(),
+    /**
+     * uglifyJS
+     */
     new UglifyJsPlugin({
       compress: {
         screw_ie8: true,
@@ -60,10 +54,16 @@ module.exports = webpackMerge(commonConfig, {
       },
       sourceMap: false
     }),
+    /**
+     * pass options to uglifyJS
+     */
     new LoaderOptionsPlugin({
       minimize: true,
       debug: false
     }),
+    /**
+     * define process.env variable in scripts
+     */
     new DefinePlugin({
       'process.env': {
         'ENV': JSON.stringify(ENV)

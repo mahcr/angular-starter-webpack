@@ -1,7 +1,7 @@
-const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
-const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const ContextReplacementPlugin  = require('webpack/lib/ContextReplacementPlugin');
+const CommonsChunkPlugin        = require('webpack/lib/optimize/CommonsChunkPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const helpers = require('./helpers');
+const helpers           = require('./scripts/helpers');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {

@@ -13,14 +13,13 @@ module.exports = {
   },
 
   output: {
-      // to create each file with the same of the key of entry
-      filename: '[name].js'
+    filename: '[name].js'
   },
 
   resolve: {
     // make webpack understand imports
-    extensions: ['.ts', '.js', '.css', '.scss'],
-    modules: ['node_modules']
+    extensions: [ '.ts', '.js', '.css', '.scss' ],
+    modules: [ 'node_modules' ]
   },
 
   module: {
@@ -40,6 +39,48 @@ module.exports = {
       {
         test: /\.(woff|woff2|ttf|eot|ico)$/,
         use: 'file-loader?name=assets/fonts/[name].[hash].[ext]'
+      },
+      /**
+       *  handle general styles
+       */
+      {
+        test: /\.css$/,
+        include: helpers.root('src', 'app/theme'),
+        use: [
+                ExtractTextPlugin.extract( { fallbackLoader: 'css-loader', loader: 'css?sourceMap' } ),
+               'postcss-loader'
+             ]
+      },
+      /**
+       *  handle component styles
+       */
+      {
+        test: /\.css$/,
+        exclude: helpers.root('src', 'app/theme'),
+        include: helpers.root('src', 'app'),
+        use: 'raw'
+      },
+      /**
+       * extra general styles to create a chuck
+       */
+      {
+        test: /\.global\.scss$/i,
+        use: [
+               ExtractTextPlugin.extract( { fallbackLoader: 'style-loader', loader: ['to-string-loader'] } ),
+               'css-loader',
+               'postcss-loader',
+               'sass-loader'
+             ]
+      },
+      /**
+       * in charged of process sass in components
+       * exports-loader - fix url issue
+       */
+      { // handle component scss
+        test: /\.scss$/,
+        exclude: [ /node_modules/, helpers.root('src', 'app/theme') ],
+        include: helpers.root('src', 'app'), // remove
+        use: [ 'exports-loader?module.exports.toString()', 'css-loader', 'postcss-loader', 'sass-loader' ]
       }
     ]
   },
@@ -50,7 +91,7 @@ module.exports = {
      * if app -> share dependecies with vendor they will be removed from app
      * */
     new CommonsChunkPlugin({
-      name: ['app', 'vendor', 'polyfills']
+      name: [ 'app', 'vendor', 'polyfills' ]
     }),
 
     new HtmlWebpackPlugin({
@@ -68,4 +109,5 @@ module.exports = {
         helpers.root('src')
       )
   ]
+
 };

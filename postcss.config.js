@@ -2,7 +2,7 @@ module.exports = {
   plugins: {
     'postcss-import': {},
     'postcss-cssnext': {
-      browsers: ['last 4 versions', '> 5%'],
+      browsers: ['last 3 versions' ],
     },
   },
 };

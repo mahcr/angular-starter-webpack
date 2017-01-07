@@ -10,9 +10,10 @@
 | @Types                    | done                 | ✔️    |
 | Uglify                    | done                 | ✔️    |
 | TSlint                    | done (missing rules) | ✔️    |
-| SASS                      | done                 |      |
-| Create style structure    | in progress          |      |
-| Autoprefix                | in progress          |      |
+| SASS                      | done                 | ✔️    |
+| Create style structure    | done                 | ✔️    |
+| Autoprefix                | fail                 | ❌    |
+| Mockdata                  | in progress          |      |
 | Bootstrap 3/4             | in progress          |      |
 | Ng-UI 2                   | in progress          |      |
 | Router                    | in progress          |      |

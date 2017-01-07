@@ -1,21 +1,39 @@
+const async       = require('async');
+const helpers     = require('../scripts/helpers');
+const chalk       = require('chalk');
 const fs          = require('fs');
 const jsf         = require('json-schema-faker');
-const chalk       = require('chalk');
-const schema      = require('../schema-data/home.data');
-
-const json = JSON.stringify(jsf(schema));
-const path = './src/app/global/api/db.data.json';
 
 /**
- * TODO: create script to get more and create more than one .json file
+ * TODO: improve code, rename file to use data instead of .schema.
  */
+const folder = helpers.root('', '/schema-data/');
 
-fs.writeFile(path, json, function(err) {
+// get filenames
+fs.readdir(folder, (err, filenames) => {
 
-  if (err) {
-    return console.log(chalk.red(err));
-  }
+  const path = helpers.root('../', 'src/app/global/api/');
+  // write files
+  async.each(filenames, (file) => {
+    // get schema
+    let schema = require(folder + file);
+    // get mockdata
+    let json   = JSON.stringify(jsf(schema));
+    // create file with the same of the schema
+    fs.writeFile(path + file, json, (err) => {
 
-  console.log(chalk.green('Mock data generated'));
+      if (err) {
+        return console.log(chalk.red(err));
+      }
+
+      console.log(chalk.green('Mock data generated'));
+
+    });
+
+  });
 
 });
+
+
+
+

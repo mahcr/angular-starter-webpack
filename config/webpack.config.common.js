@@ -64,7 +64,8 @@ module.exports = {
        * extra general styles to create a chuck
        */
       {
-        test: /\.global\.scss$/i,
+        test: /\.global.scss$/,
+        include: [ helpers.root('src', 'app/theme') ],
         use: [
                ExtractTextPlugin.extract( { fallbackLoader: 'style-loader', loader: ['to-string-loader'] } ),
                'css-loader',
@@ -79,8 +80,12 @@ module.exports = {
       { // handle component scss
         test: /\.scss$/,
         exclude: [ /node_modules/, helpers.root('src', 'app/theme') ],
-        include: helpers.root('src', 'app'), // remove
-        use: [ 'exports-loader?module.exports.toString()', 'css-loader', 'postcss-loader', 'sass-loader' ]
+        use: [
+                'exports-loader?module.exports.toString()',
+                'css-loader',
+                'postcss-loader',
+                'sass-loader'
+            ]
       }
     ]
   },

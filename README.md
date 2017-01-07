@@ -12,7 +12,7 @@
 | TSlint                    | done (missing rules) | ✔️    |
 | SASS                      | done                 | ✔️    |
 | Create style structure    | done                 | ✔️    |
-| Autoprefix                | fail                 | ❌    |
+| Autoprefix                | done                 | ✔️ ️   |
 | Mockdata                  | done (pending TODO)  | ✔️ ️ ️ ️ |
 | Bootstrap 3/4             | in progress          |      |
 | Ng-UI 2                   | in progress          |      |

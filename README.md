@@ -13,7 +13,7 @@
 | SASS                      | done                 | ✔️    |
 | Create style structure    | done                 | ✔️    |
 | Autoprefix                | fail                 | ❌    |
-| Mockdata                  | in progress          |      |
+| Mockdata                  | done (pending TODO)  | ✔️ ️ ️ ️ |
 | Bootstrap 3/4             | in progress          |      |
 | Ng-UI 2                   | in progress          |      |
 | Router                    | in progress          |      |

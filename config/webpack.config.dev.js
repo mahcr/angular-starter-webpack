@@ -21,6 +21,10 @@ module.exports = webpackMerge(commonConfig, {
         test: /\.ts$/,
         use: 'tslint-loader',
         exclude: /(node_modules)/,
+      },
+      {
+        test: /\.ts$/,
+        use: ['awesome-typescript-loader?tsconfig=../tsconfig.json', 'angular2-template-loader']
       }
     ]
   },

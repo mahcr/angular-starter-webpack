@@ -5,6 +5,7 @@ const helpers             = require('./scripts/helpers');
 const LoaderOptionsPlugin = require('webpack/lib/NoErrorsPlugin');
 const NoErrorsPlugin = require('webpack/lib/NoErrorsPlugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ngToolsWebpack = require('@ngtools/webpack');
 const UglifyJsPlugin = require ('webpack/lib/optimize/UglifyJsPlugin');
 const webpackMerge   = require('webpack-merge');
 
@@ -15,17 +16,23 @@ module.exports = webpackMerge(commonConfig, {
    * Wheren the assets will be built
    */
   output: {
-    path: helpers.root('dist'),
+    path: helpers.root('../','dist'),
     publicPath: '/',
     filename: '[name].[hash].js',
     chunkFilename: '[id].[hash].chunk.js'
   },
 
   module: {
-    rules: [ ]
+    rules: [
+      { test: /\.ts$/, use: '@ngtools/webpack' }
+    ]
   },
 
   plugins: [
+    new ngToolsWebpack.AotPlugin({
+      tsConfigPath: helpers.root('..','tsconfig.json'),
+      entryModule: helpers.root('..','src/app/app.module#AppModule')
+    }),
     /**
      * create css chuck with general styles
      */

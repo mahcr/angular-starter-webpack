@@ -4,8 +4,8 @@
 | Feature                   | Status               | Test |
 |---------------------------|----------------------|------|
 | Lazy Loading              | in progress          |      |
-| AoT                       | in progress          |      |
-| Tree Shaking              | done                 |      |
+| AoT                       | fail                 | ❌    |
+| Tree Shaking              | done                 | ✔️    |
 | Webpack 2                 | done                 | ✔️    |
 | @Types                    | done                 | ✔️    |
 | Uglify                    | done                 | ✔️    |
@@ -18,6 +18,9 @@
 | Ng-UI 2                   | in progress          |      |
 | Router                    | in progress          |      |
 | Ngrx / MobX               | in progress          |      |
+
+
+AOT: @ngtools does not support R.C3 yet - temporally run a local build from @ngtools project
 
 ## Get Started
 * nvm install 6.9.1

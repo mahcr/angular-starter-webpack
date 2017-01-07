@@ -4,6 +4,7 @@ const helpers           = require('./scripts/helpers');
 const webpackMerge      = require('webpack-merge');
 
 module.exports = webpackMerge(commonConfig, {
+
   devtool: 'cheap-module-eval-source-map',
 
   output: {

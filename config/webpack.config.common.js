@@ -37,52 +37,34 @@ module.exports = {
         use: 'file-loader?name=assets/fonts/[name].[hash].[ext]'
       },
       /**
-       *  handle general styles
+       *  handle general styles / TODO: need refactor
+       */
+      // {
+      //   test: /\.css$/,
+      //   include: helpers.root('src', 'app/theme'),
+      //   use: [
+      //           ExtractTextPlugin.extract( { fallbackLoader: 'css-loader', loader: 'css?sourceMap' } ),
+      //          'postcss-loader'
+      //        ]
+      // },
+      /**
+       *  handle component styles / TODO: need refactor
+       */
+      // {
+      //   test: /\.css$/,
+      //   exclude: helpers.root('src', 'app/theme'),
+      //   include: helpers.root('src', 'app'),
+      //   use: 'raw'
+      // },
+      /**
+       * get component styles and return a string
        */
       {
-        test: /\.css$/,
-        include: helpers.root('src', 'app/theme'),
-        use: [
-                ExtractTextPlugin.extract( { fallbackLoader: 'css-loader', loader: 'css?sourceMap' } ),
-               'postcss-loader'
-             ]
-      },
-      /**
-       *  handle component styles
-       */
-      {
-        test: /\.css$/,
-        exclude: helpers.root('src', 'app/theme'),
-        include: helpers.root('src', 'app'),
-        use: 'raw'
-      },
-      /**
-       * extra general styles to create a chuck
-       */
-      {
-        test: /\.global.scss$/,
-        include: [ helpers.root('src', 'app/theme') ],
-        use: [
-               ExtractTextPlugin.extract( { fallbackLoader: 'style-loader', loader: ['to-string-loader'] } ),
-               'css-loader',
-               'postcss-loader',
-               'sass-loader'
-             ]
-      },
-      /**
-       * in charged of process sass in components
-       * exports-loader - fix url issue
-       */
-      { // handle component scss
         test: /\.scss$/,
-        exclude: [ /node_modules/, helpers.root('src', 'app/theme') ],
-        use: [
-                'exports-loader?module.exports.toString()',
-                'css-loader',
-                'postcss-loader',
-                'sass-loader'
-            ]
-      }
+        use: [ 'to-string-loader', 'css-loader', 'postcss-loader', 'sass-loader' ],
+        exclude: [ helpers.root('..','src', 'theme') ]
+      },
+
     ]
   },
 

@@ -6,7 +6,8 @@
     "prestart": "node config/scripts/create-mockdata.js",
     "start": "webpack-dev-server --inline --progress --port 8080  --host 0.0.0.0",
     "build": "rimraf dist && webpack --config config/webpack.config.prod.js --progress --profile --bail",
-    "tslint": "tslint"
+    "tslint": "tslint",
+    "sass": "node-sass src/app/theme -o src/app/theme"
   },
   "dependencies": {
     "@angular/common": "^2.3.1",
@@ -32,8 +33,7 @@
     "awesome-typescript-loader": "^3.0.0-beta.17",
     "chalk": "^1.1.3",
     "css-loader": "^0.23.1",
-    "exports-loader": "^0.6.3",
-    "extract-text-webpack-plugin": "2.0.0-beta.4",
+    "extract-text-webpack-plugin": "~2.0.0-beta.4",
     "file-loader": "^0.8.5",
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "2.24.1",

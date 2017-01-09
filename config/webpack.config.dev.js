@@ -16,16 +16,30 @@ module.exports = webpackMerge(commonConfig, {
 
   module: {
     rules: [
-      { // preloader
+      /**
+       * run tslint
+       */
+      {
         enforce: 'pre',
         test: /\.ts$/,
         use: 'tslint-loader',
         exclude: /(node_modules)/,
       },
+      /**
+       * run angular in jit mode
+       */
       {
         test: /\.ts$/,
-        use: ['awesome-typescript-loader?tsconfig=../tsconfig.json', 'angular2-template-loader']
-      }
+        use: [ 'awesome-typescript-loader?tsconfig=../tsconfig.json', 'angular2-template-loader' ]
+      },
+      /**
+       * load general theme styles
+       */
+      {
+        test: /\.scss$/,
+        use: [ 'style-loader', 'css-loader', 'sass-loader' ],
+        include: [ helpers.root('..','src', 'theme') ]
+      },
     ]
   },
 

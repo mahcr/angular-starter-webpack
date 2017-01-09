@@ -24,19 +24,33 @@ module.exports = webpackMerge(commonConfig, {
 
   module: {
     rules: [
-      { test: /\.ts$/, use: '@ngtools/webpack' }
+      /**
+       * compile angular using AoT
+       */
+      { test: /\.ts$/, use: '@ngtools/webpack' },
+      /**
+       * extract general styles to create a chuck
+       */
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract({
+            fallbackLoader: 'style-loader',
+            loader: 'css-loader!postcss-loader!sass-loader'
+          }),
+        exclude: [ helpers.root('..', 'src', 'app') ]
+      }
     ]
   },
 
   plugins: [
     new ngToolsWebpack.AotPlugin({
-      tsConfigPath: helpers.root('..','tsconfig.json'),
+      tsConfigPath: helpers.root('..','tsconfig-aot.json'),
       entryModule: helpers.root('..','src/app/app.module#AppModule')
     }),
     /**
      * create css chuck with general styles
      */
-    new ExtractTextPlugin('assets/stylesheets/name].[hash].css'),
+    new ExtractTextPlugin('assets/stylesheets/[name].[hash].css'),
     /**
      * minify CSS code
      */
@@ -52,14 +66,26 @@ module.exports = webpackMerge(commonConfig, {
      * uglifyJS
      */
     new UglifyJsPlugin({
+      beautify: false, //prod
+      output: {
+        comments: false
+      }, //prod
+      mangle: {
+        screw_ie8: true
+      }, //prod
       compress: {
         screw_ie8: true,
-        warnings: false
-      },
-      mangle: {
-        keep_fnames: false
-      },
-      sourceMap: false
+        warnings: false,
+        conditionals: true,
+        unused: true,
+        comparisons: true,
+        sequences: true,
+        dead_code: true,
+        evaluate: true,
+        if_return: true,
+        join_vars: true,
+        negate_iife: false // we need this for lazy v8
+      }
     }),
     /**
      * pass options to uglifyJS

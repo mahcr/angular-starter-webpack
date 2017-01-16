@@ -4,9 +4,6 @@ const chalk       = require('chalk');
 const fs          = require('fs');
 const jsf         = require('json-schema-faker');
 
-/**
- * TODO: improve code, rename file to use data instead of .schema.
- */
 const folder = helpers.root('', '/schema-data/');
 
 // get filenames
@@ -16,9 +13,11 @@ fs.readdir(folder, (err, filenames) => {
   // write files
   async.each(filenames, (file) => {
     // get schema
-    let schema = require(folder + file);
+    const schema = require(folder + file);
     // get mockdata
-    let json   = JSON.stringify(jsf(schema));
+    const json   = JSON.stringify(jsf(schema));
+    // rename filename to use .data.
+    file = file.replace(/schema/i, 'data')
     // create file with the same of the schema
     fs.writeFile(path + file, json, (err) => {
 
@@ -26,7 +25,7 @@ fs.readdir(folder, (err, filenames) => {
         return console.log(chalk.red(err));
       }
 
-      console.log(chalk.green('Mock data generated'));
+      console.log(chalk.green(`Mock data generated - file: ${file}`));
 
     });
 

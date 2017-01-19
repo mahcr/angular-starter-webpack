@@ -8,6 +8,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ngToolsWebpack = require('@ngtools/webpack');
 const UglifyJsPlugin = require ('webpack/lib/optimize/UglifyJsPlugin');
 const webpackMerge   = require('webpack-merge');
+const WebpackMd5Hash = require('webpack-md5-hash');
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
@@ -94,6 +95,7 @@ module.exports = webpackMerge(commonConfig, {
       minimize: true,
       debug: false
     }),
+    new WebpackMd5Hash(),
     /**
      * define process.env variable in scripts
      */

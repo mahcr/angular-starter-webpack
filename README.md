@@ -3,9 +3,9 @@
 ## Features
 | Feature                   | Status               | Test |
 |---------------------------|----------------------|------|
-| Lazy Loading              | in progress          |      |
-| AoT                       | fail                 | ❌    |
-| Tree Shaking              | done                 | ✔️    |
+| Lazy Loading              | done (must test)     | ✔️    |
+| AoT                       | done (must test)     | ✔️    |
+| Tree Shaking              | done                 |       |
 | Webpack 2                 | done                 | ✔️    |
 | @Types                    | done                 | ✔️    |
 | Uglify                    | done                 | ✔️    |
@@ -16,11 +16,11 @@
 | Mockdata                  | done                 | ✔️ ️ ️ ️ |
 | Bootstrap 3/4             | in progress          |      |
 | Ng-UI 2                   | in progress          |      |
-| Router                    | in progress          |      |
+| Router                    | done                 | ✔️ ️ ️ ️ |
 | Ngrx / MobX               | in progress          |      |
+| webpack-md5-hash          | in progress          |      |
+| Migrate WP to ES6         | in progress          |      |
 
-
-AOT: @ngtools does not support RC.3 yet - As workaround run a local build from @ngtools project and copy and paste in the node module folder
 
 ## Get Started
 * nvm install 6.9.1

@@ -30,7 +30,9 @@ module.exports = webpackMerge(commonConfig, {
        */
       {
         test: /\.ts$/,
-        use: [ 'awesome-typescript-loader?tsconfig=../tsconfig.json', 'angular2-template-loader' ]
+        use: [  'awesome-typescript-loader?tsconfig=../tsconfig.json',
+                'angular2-template-loader',
+                'angular2-router-loader' ]
       },
       /**
        * load general theme styles

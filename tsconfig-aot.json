@@ -14,7 +14,8 @@
     ]
   },
   "files": [
-    "src/app/app.module.ts"
+    "src/app/app.module.ts",
+    "src/app/pages/+detail/detail.module.ts"
   ],
   "angularCompilerOptions": {
    "genDir": ".",

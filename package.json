@@ -33,6 +33,7 @@
     "@ngtools/webpack": "^1.2.3",
     "@types/core-js": "^0.9.35",
     "@types/node": "^7.0.0",
+    "angular2-router-loader": "^0.3.4",
     "angular2-template-loader": "^0.6.0",
     "awesome-typescript-loader": "^3.0.0-beta.17",
     "chalk": "^1.1.3",

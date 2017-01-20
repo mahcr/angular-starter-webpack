@@ -1,17 +1,17 @@
 'use strict';
 
 import async   from 'async';
-import helpers from '../scripts/helpers';
+import { root } from '../scripts/helpers';
 import chalk   from 'chalk';
 import fs      from 'fs';
 import jsf     from 'json-schema-faker';
 
-const folder = helpers.root('', '/schema-data/');
+const folder = root('', '/schema-data/');
 
 // get filenames
 fs.readdir(folder, (err, listFiles) => {
 
-  const path = helpers.root('../', 'src/app/global/api/');
+  const path = root('../', 'src/app/global/api/');
   // write files
   async.each(listFiles, (file) => {
     // get schema

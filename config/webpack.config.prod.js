@@ -1,23 +1,26 @@
-const commonConfig        = require('./webpack.config.common.js');
-const DefinePlugin        = require('webpack/lib/DefinePlugin');
-const ExtractTextPlugin   = require('extract-text-webpack-plugin');
-const helpers             = require('./scripts/helpers');
-const LoaderOptionsPlugin = require('webpack/lib/NoErrorsPlugin');
-const NoEmitOnErrorsPlugin    = require('webpack/lib/NoEmitOnErrorsPlugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const ngToolsWebpack = require('@ngtools/webpack');
-const UglifyJsPlugin = require ('webpack/lib/optimize/UglifyJsPlugin');
-const webpackMerge   = require('webpack-merge');
-const WebpackMd5Hash = require('webpack-md5-hash');
+'use strict';
+
+import { common }              from './';
+import { root }                from './scripts/helpers';
+
+import DefinePlugin            from 'webpack/lib/DefinePlugin';
+import ExtractTextPlugin       from 'extract-text-webpack-plugin';
+import LoaderOptionsPlugin     from 'webpack/lib/NoErrorsPlugin';
+import NoEmitOnErrorsPlugin    from 'webpack/lib/NoEmitOnErrorsPlugin';
+import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+import ngToolsWebpack from '@ngtools/webpack';
+import UglifyJsPlugin from  'webpack/lib/optimize/UglifyJsPlugin';
+import webpackMerge   from 'webpack-merge';
+import WebpackMd5Hash from 'webpack-md5-hash';
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
-module.exports = webpackMerge(commonConfig, {
+export const prod = webpackMerge(common, {
   /**
    * Where assets will be placed
    */
   output: {
-    path: helpers.root('../','dist'),
+    path: root('../','dist'),
     publicPath: '/',
     filename: '[name].[chunkhash].js',
     chunkFilename: '[id].[chunkhash].chunk.js'
@@ -38,15 +41,15 @@ module.exports = webpackMerge(commonConfig, {
             fallbackLoader: 'style-loader',
             loader: 'css-loader!postcss-loader!sass-loader'
           }),
-        exclude: [ helpers.root('..', 'src', 'app') ]
+        exclude: [ root('..', 'src', 'app') ]
       }
     ]
   },
 
   plugins: [
     new ngToolsWebpack.AotPlugin({
-      tsConfigPath: helpers.root('..','tsconfig-aot.json'),
-      entryModule: helpers.root('..','src/app/app.module#AppModule')
+      tsConfigPath: root('..','tsconfig-aot.json'),
+      entryModule: root('..','src/app/app.module#AppModule')
     }),
     /**
      * create css chuck with the general styles

@@ -1,10 +1,12 @@
-const ContextReplacementPlugin  = require('webpack/lib/ContextReplacementPlugin');
-const CommonsChunkPlugin        = require('webpack/lib/optimize/CommonsChunkPlugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const helpers           = require('./scripts/helpers');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+'use strict';
 
-module.exports = {
+import ContextReplacementPlugin from 'webpack/lib/ContextReplacementPlugin';
+import CommonsChunkPlugin       from 'webpack/lib/optimize/CommonsChunkPlugin';
+import ExtractTextPlugin  from 'extract-text-webpack-plugin';
+import { root }           from './scripts/helpers';
+import HtmlWebpackPlugin  from 'html-webpack-plugin';
+
+export const common = {
   // will create 3 different files
   entry: {
     'polyfills': './src/polyfills.ts',
@@ -41,7 +43,7 @@ module.exports = {
        */
       // {
       //   test: /\.css$/,
-      //   include: helpers.root('src', 'app/theme'),
+      //   include: root('src', 'app/theme'),
       //   use: [
       //           ExtractTextPlugin.extract( { fallbackLoader: 'css-loader', loader: 'css?sourceMap' } ),
       //          'postcss-loader'
@@ -52,8 +54,8 @@ module.exports = {
        */
       // {
       //   test: /\.css$/,
-      //   exclude: helpers.root('src', 'app/theme'),
-      //   include: helpers.root('src', 'app'),
+      //   exclude: root('src', 'app/theme'),
+      //   include: root('src', 'app'),
       //   use: 'raw'
       // },
       /**
@@ -62,7 +64,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [ 'to-string-loader', 'css-loader', 'postcss-loader', 'sass-loader' ],
-        exclude: [ helpers.root('..','src', 'theme') ]
+        exclude: [ root('..','src', 'theme') ]
       },
 
     ]
@@ -89,7 +91,7 @@ module.exports = {
      */
     new ContextReplacementPlugin(
         /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-        helpers.root('src')
+        root('src')
       )
   ]
 

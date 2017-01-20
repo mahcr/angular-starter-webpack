@@ -1,14 +1,16 @@
-const commonConfig      = require('./webpack.config.common.js');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const helpers           = require('./scripts/helpers');
-const webpackMerge      = require('webpack-merge');
+'use strict';
 
-module.exports = webpackMerge(commonConfig, {
+import { common }      from './';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import { root }           from './scripts/helpers';
+import webpackMerge      from 'webpack-merge';
+
+export const dev = webpackMerge(common, {
 
   devtool: 'cheap-module-eval-source-map',
 
   output: {
-    path: helpers.root('dist'),
+    path: root('dist'),
     publicPath: 'http://localhost:8080/',
     filename: '[name].js',
     chunkFilename: '[id].chunk.js'
@@ -40,7 +42,7 @@ module.exports = webpackMerge(commonConfig, {
       {
         test: /\.scss$/,
         use: [ 'style-loader', 'css-loader', 'sass-loader' ],
-        include: [ helpers.root('..','src', 'theme') ]
+        include: [ root('..','src', 'theme') ]
       },
     ]
   },

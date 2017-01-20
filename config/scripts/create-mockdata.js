@@ -1,33 +1,33 @@
 'use strict';
 
-const async       = require('async');
-const helpers     = require('../scripts/helpers');
-const chalk       = require('chalk');
-const fs          = require('fs');
-const jsf         = require('json-schema-faker');
+import async   from 'async';
+import helpers from '../scripts/helpers';
+import chalk   from 'chalk';
+import fs      from 'fs';
+import jsf     from 'json-schema-faker';
 
 const folder = helpers.root('', '/schema-data/');
 
 // get filenames
-fs.readdir(folder, (err, filenames) => {
+fs.readdir(folder, (err, listFiles) => {
 
   const path = helpers.root('../', 'src/app/global/api/');
   // write files
-  async.each(filenames, (file) => {
+  async.each(listFiles, (file) => {
     // get schema
     const schema = require(folder + file);
     // get mockdata
-    const json   = JSON.stringify(jsf(schema));
-    // rename filename to use .data.
-    file = file.replace(/schema/i, 'data')
+    const json = JSON.stringify(jsf(schema));
+    // rename file and set path
+    const fileName = `${ path + file.match(/[^.]*/i)[0] }.data.json` ;
     // create file with the same of the schema
-    fs.writeFile(path + file, json, (err) => {
+    fs.writeFile(fileName, json, (err) => {
 
       if (err) {
         return console.log(chalk.red(err));
       }
 
-      console.log(chalk.green(`Mock data generated - file: ${file}`));
+      console.log(chalk.green(`Mock data generated - file: ${fileName}`));
 
     });
 

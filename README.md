@@ -3,7 +3,7 @@
 ## Features
 | Feature                   | Status               | Test |
 |---------------------------|----------------------|------|
-| Lazy Loading              | done (must test)     | ✔️    |
+| Lazy Loading              | done                 | ✔️    |
 | AoT                       | done (must test)     | ✔️    |
 | Tree Shaking              | done (must test)     |       |
 | Webpack 2                 | done                 | ✔️    |
@@ -36,5 +36,7 @@
 * `server:dev` - start dev server
 * `server:prod` - start server pointing to dist/
 * `start` - run server:dev
-* `tslint` - run typescript litn
+* `tslint` - run typescript lint
 * `rimraf` - remove folder 
+
+TODO: implement json loader

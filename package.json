@@ -81,7 +81,11 @@
   },
   "keywords": [
     "webpack",
-    "angular"
+    "angular",
+    "AoT",
+    "Tree Shaking",
+    "Lazy Loading",
+    "SASS"
   ],
   "author": "Mariano Alvarez",
   "license": "MIT",

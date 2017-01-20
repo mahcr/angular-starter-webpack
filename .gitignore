@@ -2,5 +2,7 @@ node_modules/
 .vscode/
 npm-debug.log
 dist/
-/src/app/global/api/
 /config/env/
+
+/src/app/global/api/
+/src/app/global/config.ts

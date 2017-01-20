@@ -5,7 +5,7 @@
 |---------------------------|----------------------|------|
 | Lazy Loading              | done (must test)     | ✔️    |
 | AoT                       | done (must test)     | ✔️    |
-| Tree Shaking              | done                 |       |
+| Tree Shaking              | done (must test)     |       |
 | Webpack 2                 | done                 | ✔️    |
 | @Types                    | done                 | ✔️    |
 | Uglify                    | done                 | ✔️    |
@@ -14,12 +14,13 @@
 | Create style structure    | done                 | ✔️    |
 | Autoprefix                | done                 | ✔️ ️   |
 | Mockdata                  | done                 | ✔️ ️ ️ ️ |
+| Router                    | done                 | ✔️ ️ ️ ️ |
+| webpack-md5-hash          | done                 | ✔️ ️ ️ ️ |
+| Ngrx / MobX               | done                 | ✔️ ️ ️ ️ |
+| Migrate WP to ES6         | in progress          |      |
 | Bootstrap 3/4             | in progress          |      |
 | Ng-UI 2                   | in progress          |      |
-| Router                    | done                 | ✔️ ️ ️ ️ |
-| Ngrx / MobX               | in progress          |      |
-| webpack-md5-hash          | in progress          |      |
-| Migrate WP to ES6         | in progress          |      |
+| Config Const              | done                 | ✔️ ️ ️ ️ |
 
 
 ## Get Started
@@ -28,6 +29,8 @@
 
 ## NPM commands
 * `build:prod` - create build for production
+* `build:stage` - create build with stage endpoints
+* `build:dev` - create build for dev endpoints
 * `clean:dist` - remove dist folder
 * `mockdata` - remove existent files and create new mockdata files using schema
 * `server:dev` - start dev server

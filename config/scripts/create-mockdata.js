@@ -1,3 +1,5 @@
+'use strict';
+
 const async       = require('async');
 const helpers     = require('../scripts/helpers');
 const chalk       = require('chalk');

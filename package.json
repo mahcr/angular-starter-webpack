@@ -4,11 +4,18 @@
   "description": "Angular 2 stater kit using webpack",
   "scripts": {
     "build:prod": "rimraf dist && webpack --config config/webpack.config.prod.js --progress --profile --bail",
+    "build:dev": "rimraf dist && webpack --config config/webpack.config.prod.js --progress --profile --bail",
+    "build:stage": "rimraf dist && webpack --config config/webpack.config.prod.js --progress --profile --bail",
     "clean:dist": "npm run rimraf -- dist",
+    "config-env": "rimraf .src/app/global/config.ts && node config/scripts/copy-files.js",
     "http-server": "http-server",
     "mockdata": "npm run rimraf ./src/app/global/api/*.js && node config/scripts/create-mockdata.js",
-    "server:dev": "webpack-dev-server --inline --progress --port 8080  --host 0.0.0.0",
+    "server:dev": "webpack-dev-server --inline --progress --port 8080  --host 0.0.0.0 --open",
     "server:prod": "npm run http-server -- ./dist/ -o",
+    "prebuild:dev":"npm run config-env",
+    "prebuild:stage":"npm run config-env -- --env=stage",
+    "prebuild:prod":"npm run config-env -- --env=prod",
+    "prestart": "npm run config-env",
     "start": "npm run server:dev",
     "tslint": "tslint \"src/**/*.ts\"",
     "rimraf": "rimraf"
@@ -22,6 +29,8 @@
     "@angular/platform-browser": "2.4.3",
     "@angular/platform-browser-dynamic": "2.4.3",
     "@angular/router": "3.4.3",
+    "@ngrx/core": "^1.2.0",
+    "@ngrx/store": "^2.2.1",
     "core-js": "^2.4.1",
     "rxjs": "5.0.3",
     "zone.js": "^0.7.2"
@@ -60,7 +69,8 @@
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0",
     "webpack-md5-hash": "0.0.5",
-    "webpack-merge": "^2.3.1"
+    "webpack-merge": "^2.3.1",
+    "yargs": "^6.6.0"
   },
   "repository": {
     "type": "git",

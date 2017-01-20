@@ -17,7 +17,7 @@
 | Router                    | done                 | ✔️ ️ ️ ️ |
 | webpack-md5-hash          | done                 | ✔️ ️ ️ ️ |
 | Ngrx / MobX               | done                 | ✔️ ️ ️ ️ |
-| Migrate WP to ES6         | in progress          |      |
+| Migrate WP to ES6         | done                 | ✔️ ️ ️ ️ |
 | Bootstrap 3/4             | in progress          |      |
 | Ng-UI 2                   | in progress          |      |
 | Config Const              | done                 | ✔️ ️ ️ ️ |

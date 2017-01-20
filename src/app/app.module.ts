@@ -4,6 +4,9 @@ import { BrowserModule }  from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './global/reducers/counter';
+
 import { HomeModule } from './pages/home/home.module';
 
 import '../theme/styles.scss';
@@ -17,7 +20,9 @@ import '../theme/styles.scss';
 
     AppRoutingModule,
 
-    HomeModule
+    HomeModule,
+
+    StoreModule.provideStore({ counter: counterReducer })
   ],
   bootstrap: [ AppComponent ]
 })

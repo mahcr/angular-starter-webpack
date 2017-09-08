@@ -1,53 +1,62 @@
-var webpackMerge = require('webpack-merge');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var commonConfig = require('./webpack.config.common.js');
-var helpers = require('./helpers');
-var tslinConfig = require('./tslint');
+'use strict';
 
-module.exports = webpackMerge(commonConfig, {
+import { common }      from './';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import { root }           from './scripts/helpers';
+import webpackMerge      from 'webpack-merge';
+
+export const dev = webpackMerge(common, {
+
   devtool: 'cheap-module-eval-source-map',
 
   output: {
-    path: helpers.root('dist'),
+    path: root('dist'),
     publicPath: 'http://localhost:8080/',
     filename: '[name].js',
     chunkFilename: '[id].chunk.js'
   },
 
   module: {
-    preLoaders: [
-      { test: /\.ts$/, loader: 'tslint-loader', exclude: [/node_modules/] }
-    ],
-    loaders: [
-      { // handle general styles
-        test: /\.css$/,
-        include: helpers.root('src', 'app/theme'),
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
+    rules: [
+      /**
+       * run tslint
+       */
+      {
+        enforce: 'pre',
+        test: /\.ts$/,
+        use: 'tslint-loader',
+        exclude: /(node_modules)/,
       },
-      { // handle component styles
-        test: /\.css$/,
-        exclude: helpers.root('src', 'app/theme'),
-        include: helpers.root('src', 'app'),
-        loader: 'raw'
+      /**
+       * run angular in jit mode
+       */
+      {
+        test: /\.ts$/,
+        use: [ 'awesome-typescript-loader?tsconfig=../tsconfig.json',
+               'angular2-template-loader',
+               'angular2-router-loader' ]
       },
-      { // handle general styles
-        test: /\.global\.scss$/,
-        include: helpers.root('src', 'app/theme'),
-        loaders: ['style-loader', 'css-loader', 'resolve-url', 'sass-loader?sourceMap']
-      },
-      { // handle component scss
+      /**
+       * load general theme styles
+       */
+      {
         test: /\.scss$/,
-        exclude: [/node_modules/, helpers.root('src', 'app/theme')],
-        include: helpers.root('src', 'app'), // remove
-        loaders: ['exports-loader?module.exports.toString()', 'css', 'sass']
-      }
+        use: [ 'style-loader', 'css-loader', 'sass-loader' ],
+        include: [ root('..','src', 'theme') ]
+      },
     ]
   },
 
-  tslint: tslinConfig,
+  plugins: [
+    /**
+     * create file
+     */
+    new ExtractTextPlugin('assets/stylesheets/[name].css'),
+  ],
 
   devServer: {
     historyApiFallback: true,
     stats: 'minimal'
   }
+
 });

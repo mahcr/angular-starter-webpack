@@ -1,0 +1,37 @@
+// --------------------------------------------------
+// Font config
+// --------------------------------------------------
+
+$font-url: "fonts";
+
+/* Standard typefaces */
+$font-bold: "Roboto-Black";
+$font-normal: "Roboto-Regular";
+$font-brand: "#{$font-normal}", "Helvetica", sans-serif;
+$font-brand-bold: "#{$font-bold}", "Helvetica", sans-serif;
+
+@font-face {
+    font-family: '#{$font-bold}';
+    // src: url('#{$font-url}/#{$font-bold}.eot');
+    src:
+        //  url('#{$font-url}/#{$font-bold}.eot?#iefix') format('embedded-opentype'),
+        //  url('#{$font-url}/#{$font-bold}.woff2') format('woff2'),
+        //  url('#{$font-url}/#{$font-bold}.woff') format('woff'),
+         url('#{$font-url}/#{$font-bold}.ttf') format('truetype');
+        //  url('#{$font-url}/#{$font-bold}.svg#example') format('svg');
+    font-weight: normal;
+    font-style: bold;
+}
+
+@font-face {
+    font-family: '#{$font-normal}';
+    // src: url('#{$font-url}/#{$font-normal}.eot');
+    src:
+        //  url('#{$font-url}/#{$font-normal}.eot?#iefix') format('embedded-opentype'),
+        //  url('#{$font-url}/#{$font-normal}.woff2') format('woff2'),
+        //  url('#{$font-url}/#{$font-normal}.woff') format('woff'),
+         url('#{$font-url}/#{$font-normal}.ttf') format('truetype');
+        //  url('#{$font-url}/#{$font-normal}.svg#example') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
